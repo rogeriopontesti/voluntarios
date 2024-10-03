@@ -17,8 +17,9 @@ class EventoFactory extends Factory
     {
         return [
             'id' => fake()->uuid,
-            'titulo' => fake()->time,
-            'evento' => fake()->paragraph(3),
+            'titulo' => fake()->name,
+            'slug' => fake()->slug,
+            'evento' => fake()->realText,
             'data' => fake()->date,
             'hora' => fake()->time,
             'local' => fake()->address,

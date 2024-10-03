@@ -66,7 +66,6 @@ class EventoController extends Controller {
 //        $evento->hora = Input::get("hora");
 //        $evento->local = Input::get("local");
 //        $evento->save();
-
 //        $validator = Validator::make(Input::all(), $request->rules());
 //        
 //        if($validator->fails()){
@@ -82,8 +81,15 @@ class EventoController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Evento $evento) {
+    public function destroy(Evento $evento): RedirectResponse {
         //
-        return "Teste Destroy";
+        $record = Evento::find($evento->id); // Replace $id with the ID of the record you want to delete
+
+        if ($record) {
+            // Delete the record
+            $record->delete();
+        }
+
+        return redirect("/eventos");
     }
 }

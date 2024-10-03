@@ -6,42 +6,47 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ __('Eventos') }}</h5>
-                        <p class="card-text">
+                        <div class="card-text my-3 text-body-secondary">
                             {{ __('Nesta lista você poderá gerenciar todos os eventos disponíveis.') }}
-                        </p>
-                        <h6 class="card-subtitle mb-2 text-body-secondary"><a class="btn btn-sm btn-dark" href="{{ route('eventos.create') }}">Novo Evento<a></h6>
+
+                        </div>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            <a class="btn btn-md btn-success" href="{{ route('eventos.create') }}">
+                                <i class="fa-regular fa-calendar-plus"></i> {{ __('Novo Evento') }}
+                            </a>
+                        </h6>
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
-                                    <th>id</th>
-                                    <th>created_at</th>
-                                    <th>updated_at</th>
-                                    <th>titulo</th>
-                                    <th>evento</th>
-                                    <th>data</th>
-                                    <th>hora</th>
-                                    <th>local</th>
-                                    <th>ações</th>
+                                    <th>Data de Criação</th>
+                                    <th>Atualizado em</th>
+                                    <th>Título</th>
+                                    <th>Descrição</th>
+                                    <th>Data</th>
+                                    <th>Horário</th>
+                                    <th>Local</th>
                                 </tr>
                                @foreach($eventos as $evento)
                                     <tr>
-                                        <td>{{ $evento->id }}</td>
-                                        <td>{{ $evento->created_at }}</td>
-                                        <td>{{ $evento->updated_at }}</td>
-                                        <td>{{ $evento->titulo }}</td>
-                                        <td>{{ $evento->evento }}</td>
-                                        <td>{{ $evento->data }}</td>
-                                        <td>{{ $evento->hora }}</td>
-                                        <td>{{ $evento->local }}</td>
-                                        <td class="d-inline-block">
-                                            <a class="btn btn-sm btn-dark"  href='{{ route("eventos.edit", $evento->id)}}'>{{ __('Editar') }}</a>
-                                            <form action="{{ route("eventos.destroy", $evento->id)}}">
+                                        <td>{{ date("d/m/Y H:m", strtotime($evento->created_at))  }}</td>
+                                        <td>{{ date("d/m/Y H:m", strtotime($evento->updated_at)) }}</td>
+                                        <td class="text-bold">{{ $evento->titulo }}</td>
+                                        <td class="text-secondary">
+                                            {{ $evento->evento }}
+                                            <a class="text-warning text-decoration-none"  href='{{ route("eventos.edit", $evento->id)}}'>
+                                                <i class="fa-solid fa-pencil"></i>
+                                            </a>
+                                            <form class="d-inline" action="{{ route("eventos.destroy", $evento->id)}}">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-sm btn-dark" type="submit">{{ __('Excluir') }}</button>
+                                                <button class="text-danger text-decoration-none border-0 bg-white" type="submit">
+                                                    <i class="fa-regular fa-trash-can"></i>
+                                                </button>
                                             </form>
-
                                         </td>
+                                        <td>{{ date("d/m/Y", strtotime($evento->data)); }}</td>
+                                        <td>{{ date("H:m", strtotime($evento->hora)) }}</td>
+                                        <td>{{ $evento->local }}</td>
                                     </tr>
                                 @endforeach
                             </table>

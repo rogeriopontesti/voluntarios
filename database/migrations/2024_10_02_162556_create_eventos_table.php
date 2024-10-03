@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->string("titulo");
+            $table->string("slug");
             $table->text("evento");
             $table->date("data");
             $table->time("hora");

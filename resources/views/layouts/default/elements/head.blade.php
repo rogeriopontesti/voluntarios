@@ -5,4 +5,5 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{ asset('default/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('default/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('default/css/style.css') }}">
 </head>
