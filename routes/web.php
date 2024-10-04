@@ -24,3 +24,4 @@ Route::resource("cabos_eleitorais", App\Http\Controllers\CaboEleitoralController
 Route::resource("contribuicoes", App\Http\Controllers\ContribuicaoController::class);
 Route::resource("comentarios_contribuicoes", App\Http\Controllers\ComentarioContribuicaoController::class);
 Route::resource("eventos", App\Http\Controllers\EventoController::class);
+Route::resource("enderecos", App\Http\Controllers\EnderecoController::class);

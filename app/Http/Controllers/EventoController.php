@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\EventoCreateRequest;
 use App\Http\Requests\EventoUpdateRequest;
 use App\Http\Controllers\Validator;
+use Illuminate\Support\Str;
 
 class EventoController extends Controller {
 
@@ -29,13 +30,27 @@ class EventoController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(EventoCreateRequest $request): RedirectResponse {
-        Evento::create($request->only([
+
+        $validated = $request->validated();
+
+//        Evento::create([
+//            "titulo" => $request->titulo,
+//            "slug" => Str::slug($request->titulo),
+//            "evento" => $request->evento,
+//            "data" => $request->data,
+//            "hora" => $request->hora,
+//            "local" => $request->local,
+//        ]);
+
+        Evento::create($request->safe()->only([
                     "titulo",
+                    "slug",
                     "evento",
                     "data",
                     "hora",
-                    "local",
+                    "local"
         ]));
+
         return redirect("/eventos");
     }
 

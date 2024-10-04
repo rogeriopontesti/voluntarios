@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Evento>
@@ -13,12 +14,14 @@ class EventoFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    
     public function definition(): array
     {
+        $titulo = "";
         return [
             'id' => fake()->uuid,
-            'titulo' => fake()->name,
-            'slug' => fake()->slug,
+            'titulo' => $titulo = fake()->name,
+            'slug' => Str::slug($titulo),
             'evento' => fake()->realText,
             'data' => fake()->date,
             'hora' => fake()->time,

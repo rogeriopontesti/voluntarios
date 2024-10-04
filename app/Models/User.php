@@ -11,6 +11,11 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
     
+    //força a exibição o UUID na lista da blade
+    public $incrementing = false;
+    protected $keyType = 'string';
+    protected $table = 'users';
+    
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 

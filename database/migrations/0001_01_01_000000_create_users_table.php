@@ -25,14 +25,14 @@ return new class extends Migration {
             $table->enum("perfil", ['comum', 'figura_publica', 'influenciador', 'candidato'])->default("comum");
             $table->enum("tipo_de_usuario", ['filiado', 'administrador'])->default("administrador");
             $table->enum("status", ['ativado', 'desativado'])->default("ativado");
-        });
-
+        });      
+        
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
-
+        
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();

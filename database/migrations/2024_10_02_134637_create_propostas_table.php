@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->uuid("user_id");
             $table->foreign("user_id")->constrained(
-                    table: 'users', indexName: 'posts_user_id_fk_2'
+                    table: 'users', indexName: 'propostas_user_id_fk_2'
             )->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->string("titulo");
             $table->text("proposta");

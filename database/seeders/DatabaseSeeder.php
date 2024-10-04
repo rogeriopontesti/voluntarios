@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\EventoSeeder;
+use Database\Seeders\EnderecoSeeder;
 
 class DatabaseSeeder extends Seeder {
 
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder {
         $this->call([
             UserSeeder::class,
             EventoSeeder::class,
+            EnderecoSeeder::class,
         ]);
 //        User::factory()->create([
 //            'name' => 'Test User',
