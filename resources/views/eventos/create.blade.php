@@ -1,12 +1,12 @@
 @extends('layouts.default.theme')
 @section('content')
 
-    <div class="container">
+    <div class="container my-3">
         <div class="row">
-            <div class="col-12">
+            <div class="col-sm-12 col-md-10 col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ __('Novo Evento') }}</h5>
+                        <h5 class="card-title fs-1">{{ __('Novo Evento') }}</h5>
                         <p class="card-text">
                             {{ __('Por favor preencha todos os campos.') }}
                         </p>
@@ -68,4 +68,4 @@
             </div>
         </div>
     </div>
-@stop
+@endsection

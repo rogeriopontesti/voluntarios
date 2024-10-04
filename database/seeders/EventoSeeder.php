@@ -17,7 +17,7 @@ class EventoSeeder extends Seeder
     {
         
         Evento::factory()->count(50)->create();
-        
+       
 //        DB::table('eventos')->insert([
 //            'id' => Str::uuid(),
 //            'titulo' => "Evento Teste",
