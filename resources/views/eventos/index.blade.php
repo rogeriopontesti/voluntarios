@@ -26,6 +26,7 @@
                                 <tr>
                                     <th>Data de Criação</th>
                                     <th>Atualizado em</th>
+                                    <th>Criado por</th>
                                     <th>Título</th>
                                     <th>Descrição</th>
                                     <th>Data</th>
@@ -36,6 +37,7 @@
                                     <tr>
                                         <td>{{ date("d/m/Y H:m", strtotime($evento->created_at))  }}</td>
                                         <td>{{ date("d/m/Y H:m", strtotime($evento->updated_at)) }}</td>
+                                        <td><a href="{{  $evento->user->id }}">{{  $evento->user->nome }}</a></td>
                                         <td class="text-bold">{{ $evento->titulo }}</td>
                                         <td class="text-secondary">
                                             {{ $evento->evento }}

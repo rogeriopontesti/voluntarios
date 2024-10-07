@@ -3,6 +3,7 @@
 namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Evento>
@@ -20,6 +21,7 @@ class EventoFactory extends Factory
         $titulo = "";
         return [
             'id' => fake()->uuid,
+            'user_id' => User::pluck('id')->random(),
             'titulo' => $titulo = fake()->name,
             'slug' => Str::slug($titulo),
             'evento' => fake()->realText,

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid("user_id");
+            $table->foreign("user_id")->constrained(
+                    table: 'users', indexName: 'eventos_user_id_fk_1'
+            )->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
             $table->string("titulo")->unique();
             $table->string("slug")->unique();
