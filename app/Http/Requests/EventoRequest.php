@@ -20,7 +20,11 @@ class EventoRequest extends FormRequest {
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array {
-       
+
+        data: [
+            'foto' => 'valor default',
+        ];
+
         if (isset($this->id) && $this->route()->action["as"] == "eventos.update") {
             return [
                 'titulo' => "required|unique:eventos,titulo,{$this->id}|max:100",
@@ -29,21 +33,25 @@ class EventoRequest extends FormRequest {
                 'data' => "required|date",
                 'hora' => "required|date_format:H:i",
                 'local' => "required",
+                'foto' => "nullable|image|mimes:jpeg,jpg,png,gif,{$this->id}",
             ];
         } else {
             return [
+                'user_id' => 'required',
                 'titulo' => 'required|unique:eventos|max:100',
                 'slug' => 'required|unique:eventos|max:255',
                 'evento' => 'required|max:1000',
                 'data' => 'required|date',
                 'hora' => 'required|date_format:H:i',
                 'local' => 'required',
+                'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif',
             ];
         }
     }
 
     public function messages(): array {
         return [
+            "user_id.required" => __("* Por favor, informe o proprietário do registro!"),
             "titulo.required" => __("* Por favor, informe um título para o evento!"),
             "titulo.unique" => __("* O título informado para o evento já existe em nossos registros!"),
             'titulo.max' => __("O título informado para o evento possui mais de 100 caracteres!"),
@@ -55,6 +63,8 @@ class EventoRequest extends FormRequest {
             'hora.required' => __("Por favor, informe o horário do evento!"),
             'hora.date_format' => __("O horário informado para o evento é inválido!"),
             'local.required' => __("Por favor, informe o local que acontecerá o evento!"),
+//            'foto.image' => __("Por favor, selecione uma foto na sua galeria!"),
+//            'foto.mimes' => __("Os formatos de imagens permitido são: jpeg,jpg,png,gif!"),
         ];
     }
 

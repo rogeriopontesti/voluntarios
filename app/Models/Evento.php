@@ -21,12 +21,14 @@ class Evento extends Model {
 
     protected $fillable = [
         'id',
+        'user_id',
         'titulo',
         'slug',
         'evento',
         'data',
         'hora',
         'local',
+        'foto',
     ];
     
     public static function boot() {

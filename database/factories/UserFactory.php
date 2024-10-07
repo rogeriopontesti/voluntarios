@@ -24,20 +24,27 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $password = Str::random(10);
+        //'SEGUIDOR', 'FIGURA_PUBLICA', 'INFLUENCIADOR', 'CANDIDATO'
+        $perfis = ['SEGUIDOR', 'FIGURA_PUBLICA', 'INFLUENCIADOR', 'CANDIDATO'];
+        $tipos = ['FILIADO', 'ADMINISTRADOR'];
         return [
             'id' => fake()->uuid,
             'nome' => fake()->name,
+            'nome_social' => fake()->firstName,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make($password),
             'remember_token' => $password,
-            'cidade' => fake()->city,
-            'estado' => fake()->countryCode,
+//            'cidade' => fake()->city,
+//            'estado' => fake()->countryCode,
             'telefone' => fake()->phoneNumber,
             'area_de_atuacao' => fake()->paragraph(3),
-            'tipo_de_usuario' => "filiado",
+            'perfil' => $perfis[array_rand($perfis)],
+            'tipo_de_usuario' => $tipos[array_rand($tipos)],
+            'foto' => fake()->imageUrl(80, 80),
         ];
     }
+    
 
     /**
      * Indicate that the model's email address should be unverified.

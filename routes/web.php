@@ -25,3 +25,4 @@ Route::resource("contribuicoes", App\Http\Controllers\ContribuicaoController::cl
 Route::resource("comentarios_contribuicoes", App\Http\Controllers\ComentarioContribuicaoController::class);
 Route::resource("eventos", App\Http\Controllers\EventoController::class);
 Route::resource("enderecos", App\Http\Controllers\EnderecoController::class);
+Route::resource("users", App\Http\Controllers\UserController::class);

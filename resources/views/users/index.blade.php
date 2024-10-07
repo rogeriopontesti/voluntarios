@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fs-1">{{ __('Eventos') }}</h5>
+                        <h5 class="card-title fs-1">{{ __('Usuários') }}</h5>
                         <div class="card-text my-3 text-body-secondary">
                             {{ __('Nesta lista você poderá gerenciar todos os eventos disponíveis.') }}
 
@@ -17,8 +17,8 @@
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
                         <h6 class="card-subtitle mb-2 text-body-secondary">
-                            <a class="btn btn-md btn-success" href="{{ route('eventos.create') }}">
-                                <i class="fa-regular fa-calendar-plus"></i> {{ __('Novo Evento') }}
+                            <a class="btn btn-md btn-success align-middle" href="{{ route('users.create') }}">
+                                <span class="material-symbols-outlined align-middle">person_add</span> {{ __('Novo Usuário') }}
                             </a>
                         </h6>
                         <div class="table-responsive">
@@ -27,29 +27,24 @@
                                     <th>#</th>
                                     <th>Data de Criação</th>
                                     <th>Atualizado em</th>
-                                    <th>Criado por</th>
-                                    <th>Título</th>
-                                    <th>Descrição</th>
-                                    <th>Data</th>
-                                    <th>Horário</th>
-                                    <th>Local</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
                                 </tr>
-                               @foreach($eventos as $evento)
+                               @foreach($users as $user)
                                     <tr>
-                                        <td><img src=@if($evento->foto =='default/assets/img/icons/usuario.png	') {{ asset($evento->foto) }} @else {{ url("eventos/" . $evento->foto) }} @endif" alt="{{ $evento->nome }}" title="{{ $evento->nome }}" class="img-fluid img-thumbnail" width="90px"/></td>
-                                        <td>{{ date("d/m/Y H:m", strtotime($evento->created_at))  }}</td>
-                                        <td>{{ date("d/m/Y H:m", strtotime($evento->updated_at)) }}</td>
-                                        <td><a href="{{  $evento->user->id }}">{{  $evento->user->nome }}</a></td>
-                                        <td class="text-bold">{{ $evento->titulo }}</td>
+                                        <td><img src="{{ $user->foto  }}" alt="{{ $user->nome }}" title="{{ $user->nome }}" class="img-fluid img-thumbnail"/></td>
+                                        <td>{{ date("d/m/Y H:m", strtotime($user->created_at))  }}</td>
+                                        <td>{{ date("d/m/Y H:m", strtotime($user->updated_at)) }}</td>
                                         <td class="text-secondary">
-                                            {{ $evento->evento }}
-                                            <a class="text-primary text-decoration-none"  href='{{ route("eventos.show", $evento->id)}}'>
+                                            {{ $user->nome }}
+                                            <a class="text-primary text-decoration-none"  href='{{ route("users.show", $user->id)}}'>
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
-                                            <a class="text-warning text-decoration-none"  href='{{ route("eventos.edit", $evento->id)}}'>
+                                            <a class="text-warning text-decoration-none"  href='{{ route("users.edit", $user->id)}}'>
                                                 <i class="fa-solid fa-pencil"></i>
                                             </a>
-                                            <form class="d-inline" action="{{ route("eventos.destroy", $evento->id)}}" method="post">
+                                            <form class="d-inline" action="{{ route("users.destroy", $user->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="text-danger text-decoration-none border-0 bg-white" type="submit">
@@ -57,9 +52,8 @@
                                                 </button>
                                             </form>
                                         </td>
-                                        <td>{{ date("d/m/Y", strtotime($evento->data)); }}</td>
-                                        <td>{{ date("H:m", strtotime($evento->hora)) }}</td>
-                                        <td>{{ $evento->local }}</td>
+                                        <td class="text-bold">{{ $user->email }}</td>
+                                        <td class="text-bold">{{ $user->status }}</td>
                                     </tr>
                                 @endforeach
                             </table>
@@ -72,7 +66,7 @@
         <div class="row">
             <div class="col-12 my-3">
                 <div class="d-flex justify-content-center">
-                    {!! $eventos->links() !!}
+                    {!! $users->links() !!}
                 </div>
             </div>
         </div>

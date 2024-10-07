@@ -32,6 +32,9 @@ class User extends Authenticatable
         'telefone',
         'cidade',
         'estado',
+        'perfil',
+        'tipo_de_usuario',
+        'foto',
     ];
 
     /**
@@ -54,6 +57,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'perfil' => UserPerfisEnum::class,
+            'tipo_de_usuario' => UserTipoUsuarioEnum::class,
         ];
     }
 }

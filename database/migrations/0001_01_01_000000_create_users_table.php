@@ -15,16 +15,16 @@ return new class extends Migration {
             $table->timestamps();
             $table->rememberToken();
             $table->string('nome', 255);
+            $table->string('nome_social', 255)->nullable();
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('telefone', 40);
-            $table->string("cidade", 100);
-            $table->string('estado', 50);
+            $table->enum("perfil", ['SEGUIDOR', 'FIGURA_PUBLICA', 'INFLUENCIADOR', 'CANDIDATO'])->default("SEGUIDOR");
+            $table->enum("tipo_de_usuario", ['FILIADO', 'ADMINISTRADOR'])->default("ADMINISTRADOR");
+            $table->enum("status", ['ATIVADO', 'DESATIVADO'])->default("ATIVADO");
             $table->text('area_de_atuacao')->nullable();
-            $table->enum("perfil", ['comum', 'figura_publica', 'influenciador', 'candidato'])->default("comum");
-            $table->enum("tipo_de_usuario", ['filiado', 'administrador'])->default("administrador");
-            $table->enum("status", ['ativado', 'desativado'])->default("ativado");
+            $table->string('foto')->nullable()->default("default/assets/img/icons/usuario.png");
         });      
         
         Schema::create('password_reset_tokens', function (Blueprint $table) {

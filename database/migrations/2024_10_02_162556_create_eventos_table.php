@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date("data");
             $table->time("hora");
             $table->string("local");
+            $table->string('foto')->nullable()->default("default/assets/img/icons/calendario.png");
         });
     }
    

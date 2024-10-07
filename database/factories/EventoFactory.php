@@ -30,6 +30,7 @@ class EventoFactory extends Factory
             'local' => fake()->address,
             'created_at' => fake()->dateTime(),
             'updated_at' => fake()->dateTime(),
+            'foto' => fake()->imageUrl(800, 800),
         ];
     }
 }
