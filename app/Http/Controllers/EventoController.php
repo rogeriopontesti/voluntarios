@@ -6,6 +6,9 @@ use App\Models\Evento;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\EventoRequest;
+use Illuminate\Support\Facades\DB;
+use App\Enums\UserPerfisEnum;
+use App\Enums\UserTipoUsuarioEnum;
 
 class EventoController extends Controller {
 
@@ -30,7 +33,7 @@ class EventoController extends Controller {
             $extension = $request->file('foto')->getClientOriginalExtension();
             $serialFolder = time();
             $fileNameToStore = $newFilename . '_' . $serialFolder . '.' . $extension;
-            $path = $request->file('foto')->storeAs($serialFolder, $fileNameToStore, options: 'eventos');  
+            $path = "default/assets/img/eventos/" . $request->file('foto')->storeAs($serialFolder, $fileNameToStore, options: 'eventos');
         } else {
             $path = 'default/assets/img/icons/usuario.png';
         }
@@ -60,7 +63,7 @@ class EventoController extends Controller {
     }
 
     public function show(Evento $evento) {
-        return view("eventos.show", compact("evento"));
+        return response()->json($evento, 200);
     }
 
     public function edit(Evento $evento) {
@@ -81,5 +84,34 @@ class EventoController extends Controller {
 
         Evento::where('id', $evento->id)->delete();
         return redirect("/eventos")->with("success", __("* O evento {$evento->titulo} foi excluído com sucesso! Esta ação não pode ser desfeita!"));
+    }
+
+    public function proprietario($id) {
+        $response = DB::table('users')->where("id", $id)->get()[0];
+
+        $perfil = "";
+        foreach (UserPerfisEnum::cases() as $p) {
+            if ($p->name == $response->perfil) {
+                $perfil = $p;
+            }
+        }
+
+        $tipo_de_usuario = "";
+        foreach (UserTipoUsuarioEnum::cases() as $tdu) {
+            if ($tdu->name == $response->tipo_de_usuario) {
+                $tipo_de_usuario = $tdu;
+            }
+        }
+
+        unset($response->perfil);
+        unset($response->tipo_de_usuario);
+        unset($response->password);
+
+        $response->perfil_name = $perfil->name;
+        $response->perfil_value = $perfil->value;
+        $response->tipo_de_usuario_name = $tipo_de_usuario->name;
+        $response->tipo_de_usuario_value = $tipo_de_usuario->value;
+
+        return response()->json($response, 200);
     }
 }

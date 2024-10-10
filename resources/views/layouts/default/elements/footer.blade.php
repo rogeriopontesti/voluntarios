@@ -2,3 +2,4 @@
 <script src="{{ asset('default/bootstrap/js/bootstrap.min.js') }}"/></script>
 <script src="{{ asset('default/fontawesome/js/all.min.js') }}"/></script>
 <script src="{{ asset('default/js/app.js') }}"></script>
+<script src="{{ asset('default/js/functions.js') }}"></script>

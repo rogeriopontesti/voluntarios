@@ -6,6 +6,7 @@
         @yield('content')
     </main>
     <footer>
+        @include('layouts.default.elements.modal')   
         @include('layouts.default.elements.footer')   
     </footer>
 </body>

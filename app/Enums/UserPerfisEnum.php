@@ -8,4 +8,6 @@ enum UserPerfisEnum: string
     case FIGURA_PUBLICA = 'Figura Pública';
     case INFLUENCIADOR = 'Influenciador';
     case CANDIDATO = 'Candidato';
+    
+    
 }

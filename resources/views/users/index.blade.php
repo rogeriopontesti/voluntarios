@@ -1,4 +1,5 @@
 @extends('layouts.default.theme')
+@section("title", env("APP_NAME") . " :: Lista de Usuários")
 @section('content')
     <div class="container my-3">
         <div class="row">

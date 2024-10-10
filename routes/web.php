@@ -23,6 +23,8 @@ Route::resource("propostas", App\Http\Controllers\PropostaController::class);
 Route::resource("cabos_eleitorais", App\Http\Controllers\CaboEleitoralController::class);
 Route::resource("contribuicoes", App\Http\Controllers\ContribuicaoController::class);
 Route::resource("comentarios_contribuicoes", App\Http\Controllers\ComentarioContribuicaoController::class);
-Route::resource("eventos", App\Http\Controllers\EventoController::class);
 Route::resource("enderecos", App\Http\Controllers\EnderecoController::class);
 Route::resource("users", App\Http\Controllers\UserController::class);
+
+Route::resource("eventos", App\Http\Controllers\EventoController::class);
+Route::get("evento/proprietario/{id}", [App\Http\Controllers\EventoController::class, "proprietario"])->name("evento.proprietario");
