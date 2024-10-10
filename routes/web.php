@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [SiteController::class, 'index'])->name("home");
+Route::get('/evento/{id}', [SiteController::class, 'evento'])->name("evento");
 
 Route::get('/dashboard', function () {
     return view('dashboard');

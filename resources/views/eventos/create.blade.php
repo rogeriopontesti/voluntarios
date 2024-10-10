@@ -23,7 +23,7 @@
                             @csrf
                             <img src="{{ asset("default/assets/img/icons/calendario.png") }}" class="img-thumbnail img-evento" width="200px">
                             <hr/>
-                            <input type="file" name="foto" id="fotoEvento" accept="image/jpeg,image/jpg,image/png,image/gif" /><!--onchange="javascript:trocaImgEvento(this);"-->
+                            <input type="file" name="foto" id="fotoEvento" accept="image/jpeg,image/jpg,image/png,image/gif" />
                             <hr/>
                             <div class="mb-3">
                                 <label for="titulo" class="form-label text-bold">* Titulo</label>
@@ -72,13 +72,13 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="evento" class="form-label text-bold">* Descrição do Evento</label>
+                                <label for="evento" class="form-label text-bold">* Sobre o Evento</label>
                                 <textarea class="form-control @error('evento') is-invalid @enderror" name="evento" id="evento">{{ old('evento') }}</textarea>
                                 @error('evento')
                                     <small class="text-danger text-bold">{{ $message }}</small>
                                 @enderror
                             </div>
-
+                            <a class="btn btn-sm btn-secondary" href="{{ route("eventos.index") }}">{{ __("Voltar") }}</a>
                             <button class="btn btn-sm btn-dark" type="submit">{{ __('Cadastrar') }}</button>
                         </form>
                     </div>

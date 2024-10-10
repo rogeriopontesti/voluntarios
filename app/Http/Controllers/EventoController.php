@@ -9,6 +9,7 @@ use App\Http\Requests\EventoRequest;
 use Illuminate\Support\Facades\DB;
 use App\Enums\UserPerfisEnum;
 use App\Enums\UserTipoUsuarioEnum;
+//use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller {
 
@@ -67,21 +68,56 @@ class EventoController extends Controller {
     }
 
     public function edit(Evento $evento) {
-        return view("eventos.edit", ["evento" => (object) $evento->attributesToArray()]);
+        $users = User::where("tipo_de_usuario", "ADMINISTRADOR")->orderBy("nome", "ASC")->get();
+        return view("eventos.edit", ["evento" => (object) $evento->attributesToArray(), "users" => $users]);
     }
 
     public function update(EventoRequest $request, Evento $evento): RedirectResponse {
 
         $request->validated();
 
-        $evento->fill($request->all());
+        if ($request->hasFile('foto')) {
+            if ($evento->foto != "default/assets/img/icons/usuario.png") {
+                $dir = $this->getFolderStorange($evento->foto, "eventos");
+                $this->rrmdir($dir);
+            }
+            $filenameWithExt = $request->file('foto')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $newFilename = str_replace("___", "_", str_replace("__", "_", str_replace(" ", "_", $filename)));
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $serialFolder = time();
+            $fileNameToStore = $newFilename . '_' . $serialFolder . '.' . $extension;
+            $path = "default/assets/img/eventos/" . $request->file('foto')->storeAs($serialFolder, $fileNameToStore, options: 'eventos');
+            $array = ["titulo" => $request->titulo,
+                "slug" => $request->slug,
+                "user_id" => $request->user_id,
+                "evento" => $request->evento,
+                "data" => $request->data,
+                "hora" => $request->hora,
+                "local" => $request->local,
+                "foto" => $path,];
+        } else {
+            $array = ["titulo" => $request->titulo,
+                "slug" => $request->slug,
+                "user_id" => $request->user_id,
+                "evento" => $request->evento,
+                "data" => $request->data,
+                "hora" => $request->hora,
+                "local" => $request->local,];
+        }
+//        return dd($request->all());
+        $evento->fill($array);
         $evento->save();
 
         return redirect("/eventos")->with("success", __("* O evento {$request->titulo} foi atualizado com sucesso!"));
+//        return redirect()->to(url()->previous())->with("success", __("* O evento {$request->titulo} foi atualizado com sucesso!"));
     }
 
     public function destroy(Evento $evento): RedirectResponse {
-
+        if ($evento->foto != "default/assets/img/icons/usuario.png") {
+            $dir = $this->getFolderStorange($evento->foto, "eventos");
+            $this->rrmdir($dir);
+        }
         Evento::where('id', $evento->id)->delete();
         return redirect("/eventos")->with("success", __("* O evento {$evento->titulo} foi excluído com sucesso! Esta ação não pode ser desfeita!"));
     }

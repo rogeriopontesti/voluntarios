@@ -27,13 +27,14 @@ class EventoRequest extends FormRequest {
 
         if (isset($this->id) && $this->route()->action["as"] == "eventos.update") {
             return [
+                'user_id' => 'required',
                 'titulo' => "required|unique:eventos,titulo,{$this->id}|max:100",
                 'slug' => "required|unique:eventos,slug,{$this->id}|max:255",
                 'evento' => "required|max:1000",
                 'data' => "required|date",
                 'hora' => "required|date_format:H:i",
                 'local' => "required",
-                'foto' => "nullable|image|mimes:jpeg,jpg,png,gif,{$this->id}",
+//                'foto' => "nullable|image|mimes:jpeg,jpg,png,gif,{$this->id}",
             ];
         } else {
             return [
@@ -63,8 +64,8 @@ class EventoRequest extends FormRequest {
             'hora.required' => __("* Por favor, informe o horário do evento!"),
             'hora.date_format' => __("* O horário informado para o evento é inválido!"),
             'local.required' => __("* Por favor, informe o local que acontecerá o evento!"),
-//            'foto.image' => __("* Por favor, selecione uma foto na sua galeria!"),
-//            'foto.mimes' => __("* Os formatos de imagens permitido são: jpeg,jpg,png,gif!"),
+            'foto.image' => __("* Por favor, selecione uma foto na sua galeria!"),
+            'foto.mimes' => __("* Os formatos de imagens permitido são: jpeg,jpg,png,gif!"),
         ];
     }
 

@@ -1,12 +1,14 @@
 $(document).ready(function () {
 
+    //botão excluir evento da div modal
     $("#dataUrlDestroy").on("submit", function (event) {
         event.preventDefault();
-        if (confirm("* Você está prestes a excluir este registro e não poderá recuperá-lo, deseja continuar?")) {
+        if (confirm($("#dataUrlDestroy > input[name=confirmGeneric]").val())) {
             event.currentTarget.submit();
         }
     });
     
+    //botão excluir evento da lista
     $(".del").on("submit", function (event) {
         event.preventDefault();
         if (confirm($(".del > input[name=confirm]").val())) {

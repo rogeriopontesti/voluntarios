@@ -14,6 +14,7 @@
                 <form class="d-none" id="dataUrlDestroy" action="" method="post">
                     @csrf
                     @method('delete')
+                    <input type="hidden" name="confirmGeneric" value="{{ __("* Você está prestes a excluir este registro e não poderá recuperá-lo, deseja continuar?") }}">
                     <button class="btn btn-danger" type="submit"> {{ __("Excluir") }} </button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __("Fechar") }}</button>
