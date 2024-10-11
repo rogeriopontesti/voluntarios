@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'index'])->name("home");
@@ -28,3 +29,7 @@ Route::resource("users", App\Http\Controllers\UserController::class);
 
 Route::resource("eventos", App\Http\Controllers\EventoController::class);
 Route::get("evento/proprietario/{id}", [App\Http\Controllers\EventoController::class, "proprietario"])->name("evento.proprietario");
+
+Route::view("login", "login.form")->name("login.form");
+Route::post("auth", [LoginController::class, "auth"])->name("login.auth");
+Route::post("logout", [LoginController::class, "logout"])->name("login.logout");

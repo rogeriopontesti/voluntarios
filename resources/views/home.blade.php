@@ -59,7 +59,7 @@ Sobre
     </section>
 
     <section>
-        <div class="container mb-3">
+        <div class="container my-3">
             <div class="row">
                 @foreach($eventos as $evento)
                     <div class="col-sm-12 col-md-3">

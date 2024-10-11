@@ -21,9 +21,9 @@ class EventoRequest extends FormRequest {
      */
     public function rules(): array {
 
-        data: [
-            'foto' => 'valor default',
-        ];
+//        data: [
+//            'foto' => 'valor default',
+//        ];
 
         if (isset($this->id) && $this->route()->action["as"] == "eventos.update") {
             return [
