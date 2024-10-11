@@ -15,7 +15,6 @@ class LoginController extends Controller {
         $request->validated();
         
         if (Auth::attempt($request->only(['email', 'password']))) {
-            $request->authenticate();
             $request->session()->regenerate();
             return redirect()->intended(route("login.dashboard"));
         } else {
@@ -23,9 +22,6 @@ class LoginController extends Controller {
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function logout(Request $request): RedirectResponse {
         $request->session()->invalidate();
         $request->session()->regenerateToken();

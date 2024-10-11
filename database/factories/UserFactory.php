@@ -23,7 +23,8 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $password = Str::random(10);
+//        $password = Str::random(10);
+        $password = 123;
         //'SEGUIDOR', 'FIGURA_PUBLICA', 'INFLUENCIADOR', 'CANDIDATO'
         $perfis = ['SEGUIDOR', 'FIGURA_PUBLICA', 'INFLUENCIADOR', 'CANDIDATO'];
         $tipos = ['FILIADO', 'ADMINISTRADOR'];
