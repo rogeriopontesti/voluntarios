@@ -9,22 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller {
 
+//    public function auth(LoginRequest $request): RedirectResponse {
     public function auth(LoginRequest $request): RedirectResponse {
         
         $request->validated();
         
-        
-//        return dd($request);
-        
-//        $credenciais = $request->only(['email', 'password']);
-        $credenciais = Request::only(['email', 'password']);
-
-        if (Auth::attempt($credenciais)) {
+        if (Auth::attempt($request->only(['email', 'password']))) {
             $request->authenticate();
             $request->session()->regenerate();
-            return redirect()->intended(route('login.dashboard'));
+            return redirect()->intended(route("login.dashboard"));
         } else {
-            redirect(route("login.form"))->with("error", __("* Usuário ou senha inválidos!"));
+            return redirect(route("login.form"))->with("error", __("* Usuário ou senha inválidos!"));
         }
     }
 

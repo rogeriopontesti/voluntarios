@@ -11,6 +11,12 @@
                             {{ __('Por favor, informe suas credênciais.') }}
                         </p>
 
+                        @if (session('error')) 
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
                         @if ($errors->any())    
                             @foreach ($errors->all() as $error)
                                 <div class="alert alert-danger">
@@ -22,14 +28,14 @@
                             <div class="mb-3">
                                 @csrf
                                 <label for="email" class="form-label">{{ __("Email") }}</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email">
                         @error('email')
                                     <small class="text-danger text-bold">{{ $message }}</small>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">{{ __("Senha") }}</label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"" id="password">
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"" name="password" id="password">
                         @error('password')
                             <small class="text-danger text-bold">{{ $message }}</small>
                         @enderror
